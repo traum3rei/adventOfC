@@ -16,19 +16,25 @@ int main()
   }
 
 
+  int result = 0;
   while(fgets(line, sizeof(line), file)) 
   {
+    int firstNum;
+    int secNum;
     int counter = 0;
     int length = strlen(line);
-    int result = 0;
     char dig[256] = "";
     for(int i = 0; i < length; i++){
         if(isdigit(line[i])) {
             strncat(dig, &line[i], 1);
             //int num = line[i] - '0';
             //result += num; 
-            if (counter == 1) {
-                break;
+            if (counter == 0) {
+                firstNum = line[i] - '0';
+                firstNum *= 10;
+                secNum = line[i] - '0'; 
+            } else {
+                secNum = line[i] - '0'; 
             }
 
             counter++;
@@ -36,8 +42,7 @@ int main()
     }
     //int num = dig - '0';
     //printf("%s", dig);
-    int num = atoi(dig);
-    result += num;
+    result += firstNum + secNum;
     printf("%d\n", result);
   };
 
